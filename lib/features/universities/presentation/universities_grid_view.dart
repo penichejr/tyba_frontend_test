@@ -13,7 +13,7 @@ class UniversitiesGridView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.86, // ← un poco más alto para dar espacio vertical
+        childAspectRatio: 0.86, 
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
@@ -39,10 +39,10 @@ class UniversitiesGridView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(
                 12,
-              ), // ← reducimos un poco el padding interno
+              ), 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min, // ← importante
+                mainAxisSize: MainAxisSize.min, 
                 children: [
                   // Icon circle
                   Container(
@@ -69,9 +69,9 @@ class UniversitiesGridView extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontSize: 13.5, // tamaño más seguro
+                          fontSize: 13.5, 
                           fontWeight: FontWeight.w600,
-                          height: 1.18, // interlineado controlado
+                          height: 1.18, 
                           letterSpacing: -0.1,
                         ),
                       ),

@@ -32,13 +32,13 @@ class _UniversitiesPageState extends State<UniversitiesPage> {
           'Universities',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
-        centerTitle: true, // ← Título centrado
+        centerTitle: true, 
         backgroundColor: const Color(
           0xFF0D47A1,
-        ), // ← Azul oscuro (puedes usar Colors.indigo[900] o Colors.blue[900] si prefieres otro tono)
-        elevation: 0, // Opcional: sin sombra para look más moderno
+        ), 
+        elevation: 0, 
         iconTheme: const IconThemeData(
-          color: Colors.white, // Flecha de atrás en blanco si hay navegación
+          color: Colors.white, 
         ),
       ),
       body: FutureBuilder<List<University>>(

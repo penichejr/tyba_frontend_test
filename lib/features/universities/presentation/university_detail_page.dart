@@ -99,7 +99,7 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
 
     setState(() {
       widget.university.students = value;
-      _studentsController.text = value.toString(); // refleja el valor guardado
+      _studentsController.text = value.toString(); 
     });
 
     _showMessage('Saved successfully ✅');
