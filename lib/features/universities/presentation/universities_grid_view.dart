@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/models/university.dart';
+import 'university_detail_page.dart';
 
 class UniversitiesGridView extends StatelessWidget {
   final List<University> universities;
@@ -20,21 +21,31 @@ class UniversitiesGridView extends StatelessWidget {
       itemBuilder: (context, index) {
         final u = universities[index];
 
-        return Card(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    u.name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(u.country),
-                ],
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => UniversityDetailPage(university: u),
+              ),
+            );
+          },
+          child: Card(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      u.name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(u.country),
+                  ],
+                ),
               ),
             ),
           ),

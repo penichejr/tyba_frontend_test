@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/models/university.dart';
+import 'university_detail_page.dart';
 
 class UniversitiesListView extends StatelessWidget {
   final List<University> universities;
@@ -21,6 +22,14 @@ class UniversitiesListView extends StatelessWidget {
             leading: const Icon(Icons.school),
             title: Text(u.name),
             subtitle: Text(u.country),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => UniversityDetailPage(university: u),
+                ),
+              );
+            },
           ),
         );
       },
