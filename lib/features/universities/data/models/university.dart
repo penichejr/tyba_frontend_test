@@ -6,8 +6,8 @@ class University {
   final List<String> domains;
   final List<String> webPages;
 
-  // String? imagePath;
-  // int? students;
+  String? imagePath;
+  int? students;
 
   University({
     required this.name,
@@ -16,8 +16,8 @@ class University {
     required this.domains,
     required this.webPages,
     this.stateProvince,
-    // this.imagePath,
-    // this.students,
+    this.imagePath,
+    this.students,
   });
 
   factory University.fromJson(Map<String, dynamic> json) {

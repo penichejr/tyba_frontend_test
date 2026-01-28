@@ -1,50 +1,110 @@
 import 'package:flutter/material.dart';
 import '../data/models/university.dart';
 
-class UniversityDetailPage extends StatelessWidget {
+class UniversityDetailPage extends StatefulWidget {
   final University university;
 
   const UniversityDetailPage({super.key, required this.university});
 
   @override
+  State<UniversityDetailPage> createState() => _UniversityDetailPageState();
+}
+
+class _UniversityDetailPageState extends State<UniversityDetailPage> {
+  final TextEditingController _studentsController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final university = widget.university;
+
     return Scaffold(
       appBar: AppBar(title: Text(university.name)),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Card(
           elevation: 3,
-          child: SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.school, size: 40),
-                  const SizedBox(height: 16),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //Card info
+                const Icon(Icons.school, size: 40),
+                const SizedBox(height: 12),
 
-                  Text(
-                    university.name,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                Text(
+                  university.name,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+                Text('Country: ${university.country}'),
+                Text('Domains: ${university.domains.join(", ")}'),
+                Text('Web: ${university.webPages.join(", ")}'),
+
+                const SizedBox(height: 20),
+                const Divider(),
+                const SizedBox(height: 20),
+
+                //Img preview
+                Container(
+                  height: 140,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.image, size: 60, color: Colors.grey),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.photo_camera),
+                    label: const Text('Upload image'),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                //Student input
+                TextField(
+                  controller: _studentsController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Number of students',
+                    prefixIcon: const Icon(Icons.people),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
+                ),
 
-                  const SizedBox(height: 12),
+                const SizedBox(height: 20),
 
-                  Text('Country: ${university.country}'),
-
-                  const SizedBox(height: 8),
-
-                  Text('Domains: ${university.domains.join(", ")}'),
-
-                  const SizedBox(height: 8),
-
-                  Text('Web: ${university.webPages.join(", ")}'),
-                ],
-              ),
+                //Save button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Save'),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
