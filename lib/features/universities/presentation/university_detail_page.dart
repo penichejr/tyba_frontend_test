@@ -14,6 +14,47 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
   final TextEditingController _studentsController = TextEditingController();
 
   @override
+  void dispose() {
+    _studentsController.dispose();
+    super.dispose();
+  }
+
+  void _saveStudents() {
+    final text = _studentsController.text.trim();
+
+    //StudentsValidations
+    if (text.isEmpty) {
+      _showMessage('Please enter number of students');
+      return;
+    }
+
+    final value = int.tryParse(text);
+
+    if (value == null) {
+      _showMessage('Students must be a valid number');
+      return;
+    }
+
+    if (value <= 0) {
+      _showMessage('Students must be greater than 0');
+      return;
+    }
+
+    //SaveStudents
+    setState(() {
+      widget.university.students = value;
+    });
+
+    _showMessage('Saved successfully ✅');
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final university = widget.university;
 
@@ -44,6 +85,7 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
                 Text('Country: ${university.country}'),
                 Text('Domains: ${university.domains.join(", ")}'),
                 Text('Web: ${university.webPages.join(", ")}'),
+                Text('Students: ${university.students ?? "Not set"}'),
 
                 const SizedBox(height: 20),
                 const Divider(),
@@ -100,7 +142,7 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _saveStudents,
                     child: const Text('Save'),
                   ),
                 ),
