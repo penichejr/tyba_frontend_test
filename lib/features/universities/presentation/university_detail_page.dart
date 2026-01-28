@@ -14,34 +14,37 @@ class UniversityDetailPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Card(
           elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(Icons.school, size: 40),
-                const SizedBox(height: 16),
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.school, size: 40),
+                  const SizedBox(height: 16),
 
-                Text(
-                  university.name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    university.name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
-                Text('Country: ${university.country}'),
+                  Text('Country: ${university.country}'),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
-                Text('Domains: ${university.domains.join(", ")}'),
+                  Text('Domains: ${university.domains.join(", ")}'),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
-                Text('Web: ${university.webPages.join(", ")}'),
-              ],
+                  Text('Web: ${university.webPages.join(", ")}'),
+                ],
+              ),
             ),
           ),
         ),
