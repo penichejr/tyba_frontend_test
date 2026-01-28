@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/models/university.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class UniversityDetailPage extends StatefulWidget {
   final University university;
@@ -11,7 +13,59 @@ class UniversityDetailPage extends StatefulWidget {
 }
 
 class _UniversityDetailPageState extends State<UniversityDetailPage> {
+  final ImagePicker _picker = ImagePicker();
+  File? _selectedImage;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final picked = await _picker.pickImage(source: source);
+
+    if (picked == null) return;
+
+    setState(() {
+      _selectedImage = File(picked.path);
+      widget.university.imagePath = picked.path;
+    });
+  }
+
+  void _showImageOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_camera),
+              title: const Text('Camera'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Gallery'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.gallery);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   final TextEditingController _studentsController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // reconstruir imagen si ya existe
+    if (widget.university.imagePath != null) {
+      _selectedImage = File(widget.university.imagePath!);
+    }
+  }
 
   @override
   void dispose() {
@@ -92,6 +146,7 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
                 const SizedBox(height: 20),
 
                 //Img preview
+                // Img preview
                 Container(
                   height: 140,
                   width: double.infinity,
@@ -99,9 +154,22 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Center(
-                    child: Icon(Icons.image, size: 60, color: Colors.grey),
-                  ),
+                  child: _selectedImage != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.file(
+                            _selectedImage!,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : const Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 60,
+                            color: Colors.grey,
+                          ),
+                        ),
                 ),
 
                 const SizedBox(height: 12),
@@ -109,7 +177,7 @@ class _UniversityDetailPageState extends State<UniversityDetailPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: _showImageOptions,
                     icon: const Icon(Icons.photo_camera),
                     label: const Text('Upload image'),
                   ),
